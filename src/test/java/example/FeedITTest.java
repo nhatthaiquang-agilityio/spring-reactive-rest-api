@@ -1,0 +1,103 @@
+// package example;
+
+// import java.util.Collections;
+
+// import org.assertj.core.api.Assertions;
+// import org.junit.After;
+// import org.junit.Before;
+// import org.junit.Test;
+// import org.junit.runner.RunWith;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.boot.test.context.SpringBootTest;
+// import org.springframework.http.MediaType;
+// import org.springframework.test.context.junit4.SpringRunner;
+// import org.springframework.test.web.reactive.server.WebTestClient;
+// import reactor.core.publisher.Mono;
+
+// import example.model.Feed;
+// import example.repository.FeedRepository;
+
+// @RunWith(SpringRunner.class)
+// @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+// public class FeedITTest {
+
+// 	@Autowired
+// 	private WebTestClient webTestClient;
+
+// 	@Autowired
+//     FeedRepository feedRepository;
+
+//     @Before
+//     public void setUp() throws Exception{
+
+//     }
+
+//     @After
+//     public void tearDown() throws Exception{
+//     }
+
+//     @Test
+// 	public void testCreateFeed() {
+// 		Feed feed = new Feed("This is a Test Feed", "Hello world");
+
+// 		webTestClient.post().uri("/feeds")
+//             .contentType(MediaType.APPLICATION_JSON_UTF8)
+//             .accept(MediaType.APPLICATION_JSON_UTF8)
+//             .body(Mono.just(feed), Feed.class)
+//             .exchange().expectStatus().isOk()
+//             .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+//             .expectBody()
+//             .jsonPath("$.id").isNotEmpty()
+//             .jsonPath("$.title").isEqualTo("This is a Test Feed")
+//             .jsonPath("$.body").isEqualTo("Hello world");
+// 	}
+
+//     @Test
+//     public void testGetAllFeeds() {
+// 	    webTestClient.get().uri("/feeds")
+//             .accept(MediaType.APPLICATION_JSON_UTF8)
+//             .exchange()
+//             .expectStatus().isOk()
+//             .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+//             .expectBodyList(Feed.class);
+//     }
+
+//     @Test
+//     public void testGetFeed() {
+//         Feed feed = feedRepository.save(new Feed("Running", "Hello, World!")).block();
+
+//         webTestClient.get()
+//             .uri("/feeds/{id}", Collections.singletonMap("id", feed.getId()))
+//             .exchange()
+//             .expectStatus().isOk()
+//             .expectBody()
+//             .consumeWith(response ->
+//                 Assertions.assertThat(response.getResponseBody()).isNotNull());
+//     }
+
+//     @Test
+//     public void testUpdateFeed() {
+//         Feed feed = feedRepository.save(new Feed("Initial Feed", "Spring Boot")).block();
+//         Feed newFeedData = new Feed("Update Feed", "Spring Boot Example");
+
+//         webTestClient.put()
+//             .uri("/feeds/{id}", Collections.singletonMap("id", feed.getId()))
+//             .contentType(MediaType.APPLICATION_JSON_UTF8)
+//             .accept(MediaType.APPLICATION_JSON_UTF8)
+//             .body(Mono.just(newFeedData), Feed.class)
+//             .exchange().expectStatus().isOk()
+//             .expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+//             .expectBody()
+//             .jsonPath("$.title").isEqualTo("Updated Feed");
+//     }
+
+//     @Test
+//     public void testDeleteFeed() {
+// 	    Feed feed = feedRepository.save(new Feed("To be deleted", "Spring Example")).block();
+
+// 	    webTestClient.delete()
+//             .uri("/feeds/{id}", Collections.singletonMap("id",  feed.getId()))
+//             .exchange().expectStatus().isOk();
+//     }
+
+// }
