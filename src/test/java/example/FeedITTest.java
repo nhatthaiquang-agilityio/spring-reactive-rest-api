@@ -14,12 +14,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.core.publisher.Mono;
-
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.springSecurity;
 import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.Credentials.basicAuthenticationCredentials;
 import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.csrf;
+
+import reactor.core.publisher.Mono;
 
 import example.model.Feed;
 import example.repository.FeedRepository;
@@ -28,8 +28,7 @@ import example.repository.FeedRepository;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FeedITTest {
 
-	// @Autowired
-	private WebTestClient webTestClient;
+    private WebTestClient webTestClient;
 
 	@Autowired
     FeedRepository feedRepository;
