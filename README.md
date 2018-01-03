@@ -29,10 +29,12 @@ src/main/resource/application.properties
 
 # Integration Tests
 An integration test based on Spring's WebTestClient
+
 Testing api with basicAuthentication
 
 # Usage
 [Create application from Spring Initializr](http://start.spring.io/)
+
 Add dependencies: Reactive Web, Reactive MongoDB, Security
 
 
@@ -49,6 +51,7 @@ Using default security password: 32fd0ac8-ba12-4978-ae28-0cea0dfd636e
 Config username and password in SecurityConfig.java
 
 
+### Command
 Clean
 ```
 mvn clean
